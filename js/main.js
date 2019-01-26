@@ -5,7 +5,7 @@ let song;
 
 function preload() {
 	soundFormats('wav');
-	song = loadSound('media/GameJam.mp3');
+	song = loadSound('../media/GameJam.mp3');
 }
 
 function setup() {
