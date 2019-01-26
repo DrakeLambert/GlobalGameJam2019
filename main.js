@@ -48,5 +48,6 @@ function mousePressed() {
 	}
 	for (let i = 0.1; i < 0.7; i+=.1) {
 		window.setTimeout(song.setVolume.bind(song), 500, i);
+		console.log(sound.getVolume());
 	}
 }
