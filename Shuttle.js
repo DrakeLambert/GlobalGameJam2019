@@ -6,7 +6,7 @@ class Shuttle {
 		this.y = y;
 		this.maxVelocity = 3;
 		this.velocity = 0;
-		this.acceleration = 0.1;
+		this.acceleration = 0.04;
 	}
 	updatePosition() {
 		if (this.velocity < this.maxVelocity) {
