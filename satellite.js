@@ -5,6 +5,7 @@ class Satellite {
 		this.angle = Math.random() * 2 * PI;
 		this.speed = Math.random() * .01;
 		
+		onUpdatePosition.subscribe(this.updatePosition.bind(this));
 		onDraw.subscribe(this.draw.bind(this));
 	}
 
@@ -27,7 +28,6 @@ class Satellite {
 	}
 
 	draw() {
-		this.updatePosition();
 		push();
 		fill(this.owner.color);
 		circle(this.x, this.y, 3);

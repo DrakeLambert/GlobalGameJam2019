@@ -1,5 +1,6 @@
 const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
+const onUpdatePosition = new Trigger();
 let bg;
 function setup() {
 	document.body.style.margin = 0;
@@ -21,6 +22,7 @@ function setup() {
 const onDraw = new Trigger();
 function draw() {
 	bg.setStars();
+	onUpdatePosition.trigger();
 	onDraw.trigger();
 }
 

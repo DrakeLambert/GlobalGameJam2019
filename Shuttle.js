@@ -9,13 +9,14 @@ class Shuttle {
 		/**@type {Number} */
 		this.y = y;
 		/**@type {Number} */
-		this.maxVelocity = 3;
+		this.maxVelocity = 2.5;
 		/**@type {Number} */
 		this.velocity = 0;
 		/**@type {Number} */
 		this.acceleration = 0.04;
 
-		this.draw = onDraw.subscribe(this.onDraw.bind(this));
+		this.onUpdatePosition = onUpdatePosition.subscribe(this.updatePosition.bind(this));
+		this.onDraw = onDraw.subscribe(this.draw.bind(this));
 	}
 	updatePosition() {
 		if (this.velocity < this.maxVelocity) {
@@ -30,18 +31,18 @@ class Shuttle {
 		}
 		this.x += dX;
 		this.y += dY;
+		if (this.hasArrived()) {
+			onUpdatePosition.unsubscribe(this.onUpdatePosition);
+			onDraw.unsubscribe(this.onDraw);
+			this.destination.receiveShuttle(this);
+		}
 	}
 
 	hasArrived() {
 		return dist(this.x, this.y, this.destination.x, this.destination.y) < this.destination.diameter / 2;
 	}
 
-	onDraw() {
-		if (this.hasArrived()) {
-			onDraw.unsubscribe(this.draw);
-			this.destination.receiveShuttle(this);
-		}
-		this.updatePosition();
+	draw() {
 		push();
 		fill(this.owner.color);
 		stroke('black');

@@ -27,9 +27,7 @@ class Planet {
 	}
 
 	spawnShuttle() {
-		if (this.owner) {
-			this.shuttleCount += 1;
-		}
+		this.shuttleCount += 1;
 	}
 
 	deployShuttle() {
@@ -67,9 +65,9 @@ class Planet {
 		push();
 		if (this.selected) {
 			noFill();
-			stroke('red');
-			strokeWeight(2);
-			rect(this.x - this.diameter / 2 + 2, this.y - this.diameter / 2 + 2, this.diameter - 4, this.diameter - 4);
+			stroke('green');
+			strokeWeight(1);
+			circle(this.x, this.y, this.diameter / 2 + 5);
 		}
 		pop();
 	}
@@ -102,13 +100,15 @@ class Planet {
 	 * @param {Shuttle} shuttle 
 	 */
 	receiveShuttle(shuttle) {
-		if (this.shuttleCount <= 0) {
-			this.owner = shuttle.owner;
-		}
 		if (this.owner === shuttle.owner) {
 			this.shuttleCount += 1;
-		} else {
+		} else if (this.owner) {
 			this.shuttleCount -= 1;
+		} else {
+			this.shuttleCount -= 2;
+		}
+		if (this.shuttleCount <= 0) {
+			this.owner = shuttle.owner;
 		}
 	}
 }
