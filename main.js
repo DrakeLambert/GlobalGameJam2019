@@ -39,9 +39,6 @@ function touchStarted() {
 const onMouseClicked = new Trigger();
 function mouseClicked() {
 	onMouseClicked.trigger();
-}
-
-function mousePressed() {
 	if (!song.isPlaying() && song.isLoaded()) {
 		song.setVolume(0.5);
 		song.loop();
