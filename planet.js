@@ -71,12 +71,10 @@ class Planet {
 	mouseClicked() {
 		if (this.containsPoint(mouseX, mouseY)) {
 			this.selected = true;
-
 		} else {
 			this.selected = false;
 		}
 	}
-
 
 	onPlayerSelect(player, planet) {
 		if (player.lastPlanetSelection) {
