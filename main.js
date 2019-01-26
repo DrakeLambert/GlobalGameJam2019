@@ -25,6 +25,9 @@ function draw() {
 	onUpdatePosition.trigger();
 	onDraw.trigger();
 }
+function touchStarted() {
+	draw();
+}
 
 const onMouseClicked = new Trigger();
 function mouseClicked() {
