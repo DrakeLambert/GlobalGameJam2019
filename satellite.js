@@ -15,6 +15,17 @@ class Satellite {
 		this.y = sin(this.angle) * 30 + this.planet.y;
 	}
 
+	laser(pX,pY) {
+		push();
+		stroke(255,0,0,200);
+		strokeWeight(15);
+		line(this.x, this.y, mouseX, mouseY);
+		stroke(255);
+		strokeWeight(3);
+		line(this.x, this.y, mouseX, mouseY);
+		pop();
+	}
+
 	draw() {
 		this.updatePosition();
 		push();
