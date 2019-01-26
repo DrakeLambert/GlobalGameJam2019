@@ -1,23 +1,23 @@
 class Satellite {
 	constructor(owner, planet) {
 		this.owner = owner;
-        this.planet = planet;
-        this.speed = 0.5;
-        this.angle = 0;
+	this.planet = planet;
+	this.angle = Math.random() * 2*PI;
+	this.speed = Math.random() * .01;
 	}
 
 	updatePosition() {
-        this.angle += .01;
+        this.angle += .005+this.speed;
         if (this.angle >= 2*PI) this.angle = 0;
         this.x = cos(this.angle) * 30 + this.planet.x;
         this.y = sin(this.angle) * 30 + this.planet.y;
 	}
-
+	
 	draw() {
 		this.updatePosition();
 		push();
 		fill(this.owner.color);
-		circle(this.x, this.y, 2);
+		circle(this.x, this.y, 3);
 		pop();
 	}
 }
