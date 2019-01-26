@@ -2,20 +2,17 @@ const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
 
-// function preload() {
-// 	soundFormats('wav');
-// 	song = loadSound('media/GameJam.mp3');
-// }
+function preload() {
+	soundFormats('wav');
+	song = loadSound('media/GameJam.mp3');
+}
 
 function setup() {
 	document.body.style.margin = 0;
-	var music = document.getElementbyId("music");
-	music.play();
 	createCanvas(windowWidth, windowHeight - 5);
-	
-	
-	
-	new Background()
+
+	// Create Background
+	new Background();
 	
 	// Create planets
 	let planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30)));
@@ -43,11 +40,12 @@ function mouseClicked() {
 	onMouseClicked.trigger();
 }
 
-// function mousePressed() {
-// 	song.play();
-// }
-
-// function playMusic() {
-// 	console.log("song.play()");
-// 	song.play();
-// }
+function mousePressed() {
+	if (!song.isPlaying()) {
+		song.setVolume(0.0);
+		song.play();
+	}
+	for (let i = 0.1; i < 0.7; i+=.1) {
+		window.setTimeout(song.setVolume.bind(song), 500, i);
+	}
+}
