@@ -2,7 +2,7 @@ class Planet {
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
-		this.size = 30;
+		this.diameter = 30;
 		this.shuttleCount = 0;
 		this.owner = null;
 		this.selected = false;
@@ -41,7 +41,7 @@ class Planet {
 		} else {
 			fill('whitesmoke');
 		}
-		ellipse(this.x, this.y, this.size, this.size);
+		ellipse(this.x, this.y, this.diameter, this.diameter);
 		pop();
 
 		// shuttle count
@@ -58,7 +58,7 @@ class Planet {
 			noFill();
 			stroke('red');
 			strokeWeight(2);
-			rect(this.x - this.size / 2 + 2, this.y - this.size / 2 + 2, this.size - 4, this.size - 4);
+			rect(this.x - this.diameter / 2 + 2, this.y - this.diameter / 2 + 2, this.diameter - 4, this.diameter - 4);
 		}
 		pop();
 
@@ -92,6 +92,6 @@ class Planet {
 	}
 
 	containsPoint(x, y) {
-		return dist(this.x, this.y, x, y) < this.size / 2;
+		return dist(this.x, this.y, x, y) < this.diameter / 2;
 	}
 }
