@@ -22,15 +22,23 @@ class Player {
 	}
 
 	selectPlanet(args) {
+		/**@type {Planet} */
 		let planet = args[0];
-		if (this.lastSelectedPlanet && this.lastSelectedPlanet.owner === this) {
+
+		if (this.lastSelectedPlanet) {
 			if (this.lastSelectedPlanet === planet) {
 				this.lastSelectedPlanet.targetPlanet = null;
 			} else {
 				this.lastSelectedPlanet.targetPlanet = planet;
 			}
+			this.lastSelectedPlanet.selected = false;
+			this.lastSelectedPlanet = null;
+		} else {
+			if (planet.owner === this) {
+				this.lastSelectedPlanet = planet;
+				planet.selected = true;
+			}
 		}
-		this.lastSelectedPlanet = planet;
 	}
 
 	ditchPlanet(planet) {
