@@ -1,5 +1,7 @@
 const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
+const onUpdatePosition = new Trigger();
+
 function setup() {
 	document.body.style.margin = 0;
 	createCanvas(windowWidth, windowHeight - 5);
