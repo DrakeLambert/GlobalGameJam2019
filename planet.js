@@ -8,10 +8,9 @@ class Planet {
 		this.owner = null;
 		this.selected = false;
 		this.spawner = setInterval(this.spawnShuttle.bind(this), 1000);
-		this.deployer = setInterval(this.deployShuttle.bind(this), 500);
+		this.deployer = setInterval(this.deployShuttle.bind(this), 200);
 		/**@type {Planet} */
 		this.targetPlanet = null;
-		this.shuttles = [];
 
 		this.onSelected = new Trigger();
 
@@ -30,6 +29,8 @@ class Planet {
 	spawnShuttle() {
 		if (this.owner) {
 			this.shuttleCount += 1;
+		} else {
+			this.shuttleCount = 0;
 		}
 	}
 
@@ -37,7 +38,7 @@ class Planet {
 		if (this.targetPlanet) {
 			if (this.shuttleCount > 0) {
 				this.shuttleCount -= 1;
-				this.shuttles.push(new Shuttle(this.owner, this.targetPlanet, this.x, this.y));
+				new Shuttle(this.owner, this.targetPlanet, this.x, this.y);
 			}
 		}
 	}
@@ -73,20 +74,11 @@ class Planet {
 			rect(this.x - this.diameter / 2 + 2, this.y - this.diameter / 2 + 2, this.diameter - 4, this.diameter - 4);
 		}
 		pop();
-
-		this.shuttles.forEach(m => {
-			m.updatePosition();
-			m.draw();
-		});
 	}
 
 	mouseClicked() {
 		if (this.containsPoint(mouseX, mouseY)) {
-			this.selected = true;
-			this.onSelected.trigger(this);
 			onPlanetSelectedGlobal.trigger(this);
-		} else {
-			this.selected = false;
 		}
 	}
 
@@ -107,5 +99,20 @@ class Planet {
 
 	containsPoint(x, y) {
 		return dist(this.x, this.y, x, y) < this.diameter / 2;
+	}
+	/**
+	 * @param {Shuttle} shuttle 
+	 */
+	receiveShuttle(shuttle) {
+		if (this.owner) {
+			if (this.owner === shuttle.owner) {
+				this.shuttleCount += 1;
+			} else {
+				this.shuttleCount -= 1;
+			}
+		} else {
+			this.owner = shuttle.owner;
+		}
+
 	}
 }
