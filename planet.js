@@ -95,7 +95,7 @@ class Planet {
 	}
 
 	containsPoint(x, y) {
-		return dist(this.x, this.y, x, y) < this.diameter / 2;
+		return dist(this.x, this.y, x, y) < this.diameter / 1.5;
 	}
 	/**
 	 * @param {Shuttle} shuttle 
