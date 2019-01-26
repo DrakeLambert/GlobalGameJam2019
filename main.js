@@ -2,9 +2,18 @@ const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
 
+// function preload() {
+// 	soundFormats('wav');
+// 	song = loadSound('media/GameJam.mp3');
+// }
+
 function setup() {
 	document.body.style.margin = 0;
+	var music = document.getElementbyId("music");
+	music.play();
 	createCanvas(windowWidth, windowHeight - 5);
+	
+	
 	
 	new Background()
 	
@@ -30,3 +39,12 @@ const onMouseClicked = new Trigger();
 function mouseClicked() {
 	onMouseClicked.trigger();
 }
+
+// function mousePressed() {
+// 	song.play();
+// }
+
+// function playMusic() {
+// 	console.log("song.play()");
+// 	song.play();
+// }

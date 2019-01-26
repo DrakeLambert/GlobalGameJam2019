@@ -7,7 +7,7 @@ class Planet {
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
-		this.spawner = setInterval(this.spawnShuttle.bind(this), 4000);
+		this.spawner = setInterval(this.spawnShuttle.bind(this), 2000);
 		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
 		/**@type {Planet} */
 		this.targetPlanet = null;
