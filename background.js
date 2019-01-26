@@ -1,38 +1,30 @@
 class Background {
     constructor(number) {
         this.number = number;
-        this.stars = [];
-        for (let x=0; x < this.number; x++) {
-            this.stars[x] = new Stars(Math.random()*(windowWidth+100), Math.random()*(windowHeight+100), Math.random()*3);
-        }
+        this.stars1 = [];
+        this.stars2 = [];
+        this.stars3 = [];
         this.angle = 0;
-    }
-
-    setStars() {
-        background('black');
-        color('white');
-
-        this.angle += .05;
-		if (this.angle >= 2 * PI) this.angle = 0;
-		this.x = cos(this.angle)/20;
-		this.y = sin(this.angle)/20;
         
-        this.stars.forEach(s => s.draw(mouseX,mouseY,this.x,this.y));
-    }
-}
+        onDraw.subscribe(this.draw.bind(this));
 
-class Stars {
-    constructor(x,y,s) {
-        this.x = x;
-        this.y = y;
-        this.s = s;
-    }
+        background('black');
+        for (let i=0; i < 334; i++) {
 
-    draw(xOff,yOff,pX,pY) {
-        color('white');
-        this.x += pX;
-        this.y += pY;
-        circle((this.x)-((xOff*this.s)/80), this.y-((yOff*this.s)/80), this.s);
+            this.stars1[i] = {x:Math.random()*(windowWidth+100), y:Math.random()*(windowHeight+100)};
+            this.stars2[i] = {x:Math.random()*(windowWidth+100), y:Math.random()*(windowHeight+100)};
+            this.stars3[i] = {x:Math.random()*(windowWidth+100), y:Math.random()*(windowHeight+100)};
+        }
     }
 
+    draw() {
+        background('black');
+        push();
+        for (let i=0; i < 334; i++) {
+            circle(this.stars1[i].x-((mouseX*1)/80),this.stars1[i].y-((mouseY*1)/80),1);
+            circle(this.stars2[i].x-((mouseX*2)/80),this.stars2[i].y-((mouseY*2)/80),1.5);
+            circle(this.stars3[i].x-((mouseX*3)/80),this.stars3[i].y-((mouseY*3)/80),2);
+        }
+        pop();
+    }
 }

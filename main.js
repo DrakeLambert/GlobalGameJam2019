@@ -1,12 +1,11 @@
 const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
-const onUpdatePosition = new Trigger();
-let bg;
 function setup() {
 	document.body.style.margin = 0;
 	createCanvas(windowWidth, windowHeight - 5);
-	bg = new Background(1000);
-
+	
+	new Background()
+	
 	// Create planets
 	let planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30)));
 
@@ -21,7 +20,6 @@ function setup() {
 
 const onDraw = new Trigger();
 function draw() {
-	bg.setStars();
 	onUpdatePosition.trigger();
 	onDraw.trigger();
 }
