@@ -25,9 +25,6 @@ function setup() {
 
 	// Create satellites
 	new Satellite(mainPlayer, planets[0]);
-
-	// play music
-	song.play();
 }
 
 const onDraw = new Trigger();
@@ -45,10 +42,11 @@ function mouseClicked() {
 }
 
 function mousePressed() {
-	song.play();
-}
-
-function playMusic() {
-	console.log("song.play()");
-	song.play();
+	if (!song.isPlaying()) {
+		song.setVolume(0.0);
+		song.play();
+	}
+	for (let i = 0.1; i < 0.7; i+=.1) {
+		window.setTimeout(song.setVolume.bind(song), 500, i);
+	}
 }
