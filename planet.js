@@ -10,6 +10,9 @@ class Planet {
 		this.deployer = setInterval(this.deployShuttle.bind(this), 500);
 		this.targetPlanet = null;
 		this.shuttles = [];
+
+		drawT.subscribe(this.draw.bind(this));
+		mouseClickedT.subscribe(this.mouseClicked.bind(this));
 	}
 
 	spawnShuttle() {
@@ -63,6 +66,31 @@ class Planet {
 			m.updatePosition();
 			m.draw();
 		});
+	}
+
+	mouseClicked() {
+		if (this.containsPoint(mouseX, mouseY)) {
+			this.selected = true;
+
+		} else {
+			this.selected = false;
+		}
+	}
+
+
+	onPlayerSelect(player, planet) {
+		if (player.lastPlanetSelection) {
+			if (player.lastPlanetSelection.owner === player) {
+				if (!planet) {
+					// Stop shuttles
+					player.lastPlanetSelection.targetPlanet = null;
+				} else if (player.lastPlanetSelection !== planet) {
+					// Send shuttles
+					player.lastPlanetSelection.targetPlanet = planet;
+				}
+			}
+		}
+		player.lastPlanetSelection = planet;
 	}
 
 	containsPoint(x, y) {

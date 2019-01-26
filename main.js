@@ -1,62 +1,31 @@
-let currentScene = [];
+const planets = [];
+const satellites = [];
+const shuttles = [];
+const players = [];
 
 function setup() {
 	document.body.style.margin = 0;
 	createCanvas(windowWidth, windowHeight - 5);
 
-	planets = [...Array(10).keys()].map(i => new Planet(Math.random() * width, Math.random() * height));
-	planets.forEach(p => currentScene.push(p));
-	currentScene.push(new PlanetManager(planets));
+	// Create planets
+	[...Array(10).keys()].map(i => new Planet(Math.random() * width, Math.random() * height)).forEach(planet => planets.push(planet));
 
+	// Create player
 	mainPlayer = new Player('cornflowerblue');
-	currentScene.push(mainPlayer);
 	planets[0].owner = mainPlayer;
+	players.push(mainPlayer);
 
-	sat = new Satellite(mainPlayer, planets[0]);
-	currentScene.push(sat);
+	// Create satellites
+	satellites.push(new Satellite(mainPlayer, planets[0]));
 }
 
-
+const drawT = new Trigger();
 function draw() {
 	background('black');
-	currentScene.forEach(object => {
-		if (typeof object.draw === 'function') {
-			object.draw();
-		}
-	});
+	drawT.trigger();
 }
 
+const mouseClickedT = new Trigger();
 function mouseClicked() {
-	currentScene.forEach(object => {
-		if (typeof object.mouseClicked === 'function') {
-			object.mouseClicked();
-		}
-	});
-}
-
-class PlanetManager {
-	constructor(planets) {
-		this.planets = planets;
-	}
-
-	mouseClicked() {
-		let spaceClick = true;
-		this.planets.forEach(planet => {
-			planet.selected = false;
-			if (planet.containsPoint(mouseX, mouseY)) {
-				spaceClick = false;
-				planet.selected = true;
-				if (mainPlayer.lastPlanetSelection && mainPlayer.lastPlanetSelection !== planet && mainPlayer.lastPlanetSelection.owner === mainPlayer) {
-					mainPlayer.lastPlanetSelection.targetPlanet = planet;
-				}
-				mainPlayer.lastPlanetSelection = planet;
-			}
-		});
-		if (spaceClick) {
-			if (mainPlayer.lastPlanetSelection) {
-				mainPlayer.lastPlanetSelection.targetPlanet = null;
-			}
-			mainPlayer.lastPlanetSelection = null;
-		}
-	}
+	mouseClickedT.trigger();
 }
