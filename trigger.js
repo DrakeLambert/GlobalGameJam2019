@@ -1,5 +1,5 @@
 class Trigger {
-	constructor() {
+	constructor(source) {
 		this.listeners = [];
 	}
 	subscribe(func) {
@@ -12,7 +12,7 @@ class Trigger {
 			this.listeners.splice(index, 1);
 		}
 	}
-	trigger() {
-		this.listeners.forEach(func => func());
+	trigger(...args) {
+		this.listeners.forEach(func => func(args));
 	}
 }
