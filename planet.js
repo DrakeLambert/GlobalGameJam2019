@@ -4,15 +4,27 @@ class Planet {
 		this.y = y;
 		this.diameter = 30;
 		this.shuttleCount = 0;
+		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
 		this.spawner = setInterval(this.spawnShuttle.bind(this), 1000);
 		this.deployer = setInterval(this.deployShuttle.bind(this), 500);
+		/**@type {Planet} */
 		this.targetPlanet = null;
 		this.shuttles = [];
 
-		drawT.subscribe(this.draw.bind(this));
-		mouseClickedT.subscribe(this.mouseClicked.bind(this));
+		this.onSelected = new Trigger();
+
+		onDraw.subscribe(this.draw.bind(this));
+		onMouseClicked.subscribe(this.mouseClicked.bind(this));
+
+		onPlanetClaimed.subscribe(((args) => {
+			let planet = args[0];
+			let player = args[1];
+			if (planet === this) {
+				this.owner = player;
+			}
+		}).bind(this));
 	}
 
 	spawnShuttle() {
@@ -37,7 +49,7 @@ class Planet {
 		stroke('black');
 		strokeWeight(2);
 		if (this.owner) {
-			fill(this.owner.fillColor());
+			fill(this.owner.color);
 		} else {
 			fill('whitesmoke');
 		}
@@ -71,6 +83,8 @@ class Planet {
 	mouseClicked() {
 		if (this.containsPoint(mouseX, mouseY)) {
 			this.selected = true;
+			this.onSelected.trigger(this);
+			onPlanetSelectedGlobal.trigger(this);
 		} else {
 			this.selected = false;
 		}

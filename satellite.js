@@ -5,7 +5,7 @@ class Satellite {
 		this.angle = Math.random() * 2 * PI;
 		this.speed = Math.random() * .01;
 		
-		drawT.subscribe(this.draw.bind(this));
+		onDraw.subscribe(this.draw.bind(this));
 	}
 
 	updatePosition() {
