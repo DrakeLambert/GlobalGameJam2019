@@ -4,7 +4,7 @@ const onUpdatePosition = new Trigger();
 
 function setup() {
 	document.body.style.margin = 0;
-	createCanvas(windowWidth, windowHeight - 5);
+	createCanvas(windowWidth, windowHeight);
 	
 	new Background()
 	
