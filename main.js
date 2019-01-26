@@ -42,11 +42,9 @@ function mouseClicked() {
 }
 
 function mousePressed() {
-	if (!song.isPlaying()) {
-		song.setVolume(0.0);
+	if (!song.isPlaying() && song.isLoaded()) {
+		song.setVolume(0.5);
+		song.loop();
 		song.play();
-	}
-	for (let i = 0.1; i < 0.7; i+=.1) {
-		window.setTimeout(song.setVolume.bind(song), 500, i);
 	}
 }
