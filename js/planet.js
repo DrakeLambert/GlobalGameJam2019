@@ -109,7 +109,7 @@ class Planet {
 			this.shuttleCount -= 2;
 		}
 		if (this.shuttleCount <= 0) {
-			this.owner = shuttle.owner;
+			onPlanetClaimed.trigger(this, shuttle.owner);
 		}
 	}
 }
