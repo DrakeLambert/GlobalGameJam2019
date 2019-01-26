@@ -2,21 +2,31 @@
 let planets;
 let mainPlayer;
 let sat;
+let currentScene = [];
 
 function setup() {
 	document.body.style.margin = 0;
 	createCanvas(windowWidth, windowHeight - 5);
+
 	planets = [...Array(10).keys()].map(i => new planet(Math.random() * width, Math.random() * height));
+	planets.forEach(p => currentScene.push(p));
+
 	mainPlayer = new player('cornflowerblue');
-	sat = new satellite(mainPlayer, planets[0]);
+	currentScene.push(mainPlayer);
 	planets[0].owner = mainPlayer;
+
+	sat = new satellite(mainPlayer, planets[0]);
+	currentScene.push(sat);
 }
 
 
 function draw() {
 	background('black');
-	planets.forEach(h => h.draw());
-	sat.draw();
+	currentScene.forEach(object => {
+		if (object.draw) {
+			object.draw();
+		}
+	});
 }
 
 function mouseClicked() {
