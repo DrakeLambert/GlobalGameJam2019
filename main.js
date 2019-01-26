@@ -1,7 +1,3 @@
-
-let planets;
-let mainPlayer;
-let sat;
 let currentScene = [];
 
 function setup() {
@@ -10,6 +6,7 @@ function setup() {
 
 	planets = [...Array(10).keys()].map(i => new Planet(Math.random() * width, Math.random() * height));
 	planets.forEach(p => currentScene.push(p));
+	currentScene.push(new PlanetManager(planets));
 
 	mainPlayer = new Player('cornflowerblue');
 	currentScene.push(mainPlayer);
@@ -23,29 +20,43 @@ function setup() {
 function draw() {
 	background('black');
 	currentScene.forEach(object => {
-		if (object.draw) {
+		if (typeof object.draw === 'function') {
 			object.draw();
 		}
 	});
 }
 
 function mouseClicked() {
-	let spaceClick = true;
-	planets.forEach(planet => {
-		planet.selected = false;
-		if (planet.containsPoint(mouseX, mouseY)) {
-			spaceClick = false;
-			planet.selected = true;
-			if (mainPlayer.lastPlanetSelection && mainPlayer.lastPlanetSelection !== planet && mainPlayer.lastPlanetSelection.owner === mainPlayer) {
-				mainPlayer.lastPlanetSelection.targetPlanet = planet;
-			}
-			mainPlayer.lastPlanetSelection = planet;
+	currentScene.forEach(object => {
+		if (typeof object.mouseClicked === 'function') {
+			object.mouseClicked();
 		}
 	});
-	if (spaceClick) {
-		if (mainPlayer.lastPlanetSelection) {
-			mainPlayer.lastPlanetSelection.targetPlanet = null;
+}
+
+class PlanetManager {
+	constructor(planets) {
+		this.planets = planets;
+	}
+
+	mouseClicked() {
+		let spaceClick = true;
+		this.planets.forEach(planet => {
+			planet.selected = false;
+			if (planet.containsPoint(mouseX, mouseY)) {
+				spaceClick = false;
+				planet.selected = true;
+				if (mainPlayer.lastPlanetSelection && mainPlayer.lastPlanetSelection !== planet && mainPlayer.lastPlanetSelection.owner === mainPlayer) {
+					mainPlayer.lastPlanetSelection.targetPlanet = planet;
+				}
+				mainPlayer.lastPlanetSelection = planet;
+			}
+		});
+		if (spaceClick) {
+			if (mainPlayer.lastPlanetSelection) {
+				mainPlayer.lastPlanetSelection.targetPlanet = null;
+			}
+			mainPlayer.lastPlanetSelection = null;
 		}
-		mainPlayer.lastPlanetSelection = null;
 	}
 }
