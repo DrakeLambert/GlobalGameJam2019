@@ -1,4 +1,4 @@
-class satellite {
+class Satellite {
 	constructor(owner, planet) {
 		this.owner = owner;
         this.planet = planet;

@@ -1,28 +1,28 @@
-class planet {
+class Planet {
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
 		this.size = 30;
-		this.minionCount = 0;
+		this.shuttleCount = 0;
 		this.owner = null;
 		this.selected = false;
-		this.spawner = setInterval(this.spawnMinion.bind(this), 1000);
-		this.deployer = setInterval(this.deployMinion.bind(this), 500);
+		this.spawner = setInterval(this.spawnShuttle.bind(this), 1000);
+		this.deployer = setInterval(this.deployShuttle.bind(this), 500);
 		this.targetPlanet = null;
-		this.minions = [];
+		this.shuttles = [];
 	}
 
-	spawnMinion() {
+	spawnShuttle() {
 		if (this.owner) {
-			this.minionCount += 1;
+			this.shuttleCount += 1;
 		}
 	}
 
-	deployMinion() {
+	deployShuttle() {
 		if (this.targetPlanet) {
-			if (this.minionCount > 0) {
-				this.minionCount -= 1;
-				this.minions.push(new minion(this.owner, this.targetPlanet, this.x, this.y));
+			if (this.shuttleCount > 0) {
+				this.shuttleCount -= 1;
+				this.shuttles.push(new Shuttle(this.owner, this.targetPlanet, this.x, this.y));
 			}
 		}
 	}
@@ -41,12 +41,12 @@ class planet {
 		ellipse(this.x, this.y, this.size, this.size);
 		pop();
 
-		// minion count
+		// shuttle count
 		push();
 		noStroke();
 		fill('black');
 		textAlign(CENTER, CENTER);
-		text(this.minionCount, this.x, this.y);
+		text(this.shuttleCount, this.x, this.y);
 		pop();
 
 		// selected
@@ -59,7 +59,7 @@ class planet {
 		}
 		pop();
 
-		this.minions.forEach(m => {
+		this.shuttles.forEach(m => {
 			m.updatePosition();
 			m.draw();
 		});

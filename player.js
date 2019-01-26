@@ -1,4 +1,4 @@
-class player {
+class Player {
 	constructor(color) {
 		this.color = color;
 		this.lastPlanetSelection = null;

@@ -1,4 +1,4 @@
-class minion {
+class Shuttle {
 	constructor(owner, destination, x, y) {
 		this.owner = owner;
 		this.destination = destination;

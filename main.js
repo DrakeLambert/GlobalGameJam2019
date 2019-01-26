@@ -8,14 +8,14 @@ function setup() {
 	document.body.style.margin = 0;
 	createCanvas(windowWidth, windowHeight - 5);
 
-	planets = [...Array(10).keys()].map(i => new planet(Math.random() * width, Math.random() * height));
+	planets = [...Array(10).keys()].map(i => new Planet(Math.random() * width, Math.random() * height));
 	planets.forEach(p => currentScene.push(p));
 
-	mainPlayer = new player('cornflowerblue');
+	mainPlayer = new Player('cornflowerblue');
 	currentScene.push(mainPlayer);
 	planets[0].owner = mainPlayer;
 
-	sat = new satellite(mainPlayer, planets[0]);
+	sat = new Satellite(mainPlayer, planets[0]);
 	currentScene.push(sat);
 }
 
