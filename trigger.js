@@ -4,6 +4,7 @@ class Trigger {
 	}
 	subscribe(func) {
 		this.listeners.push(func);
+		return func;
 	}
 	unsubscribe(func) {
 		let index = this.listeners.indexOf(func);
