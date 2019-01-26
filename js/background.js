@@ -19,11 +19,15 @@ class Background {
 
     draw() {
         background('black');
+        if (this.angle >= 2 * PI) this.angle = 0;
+        else this.angle += .005;
+		this.x = cos(this.angle);
+		this.y = sin(this.angle);
         push();
         for (let i=0; i < 334; i++) {
-            circle(this.stars1[i].x-((mouseX*1)/80),this.stars1[i].y-((mouseY*1)/80),1);
-            circle(this.stars2[i].x-((mouseX*2)/80),this.stars2[i].y-((mouseY*2)/80),1.5);
-            circle(this.stars3[i].x-((mouseX*3)/80),this.stars3[i].y-((mouseY*3)/80),2);
+            circle(this.stars1[i].x-((mouseX*1)/80)*this.x, this.stars1[i].y-((mouseY*1)/80)*this.y,1);
+            circle(this.stars2[i].x-((mouseX*2)/80)*this.x, this.stars2[i].y-((mouseY*2)/80)*this.y,1.5);
+            circle(this.stars3[i].x-((mouseX*3)/80)*this.x, this.stars3[i].y-((mouseY*3)/80)*this.y,2);
         }
         pop();
     }
