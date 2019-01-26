@@ -3,11 +3,12 @@ class Planet {
 		this.x = x;
 		this.y = y;
 		this.diameter = 30;
-		this.shuttleCount = Math.floor(randomGaussian(15, 5));
+		this.shuttleCount = Math.floor(randomGaussian(10, 2));
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
-		this.spawner = setInterval(this.spawnShuttle.bind(this), 2000);
+		this.spawnRate = Math.floor(randomGaussian(3000, 1000));
+		this.spawner = setInterval(this.spawnShuttle.bind(this), this.spawnRate);
 		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
 		/**@type {Planet} */
 		this.targetPlanet = null;
@@ -94,7 +95,7 @@ class Planet {
 	}
 
 	containsPoint(x, y) {
-		return dist(this.x, this.y, x, y) < this.diameter / 2;
+		return dist(this.x, this.y, x, y) < this.diameter / 1.5;
 	}
 	/**
 	 * @param {Shuttle} shuttle 
