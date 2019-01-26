@@ -10,7 +10,7 @@ function preload() {
 
 function setup() {
 	document.body.style.margin = 0;
-	createCanvas(windowWidth, windowHeight - 5);
+	createCanvas(windowWidth, windowHeight);
 
 	// Create background
 	new Background();
