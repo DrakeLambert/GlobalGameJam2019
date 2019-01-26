@@ -3,12 +3,12 @@ class Planet {
 		this.x = x;
 		this.y = y;
 		this.diameter = 30;
-		this.shuttleCount = 0;
+		this.shuttleCount = Math.floor(randomGaussian(15, 5));
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
-		this.spawner = setInterval(this.spawnShuttle.bind(this), 1000);
-		this.deployer = setInterval(this.deployShuttle.bind(this), 200);
+		this.spawner = setInterval(this.spawnShuttle.bind(this), 4000);
+		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
@@ -29,8 +29,6 @@ class Planet {
 	spawnShuttle() {
 		if (this.owner) {
 			this.shuttleCount += 1;
-		} else {
-			this.shuttleCount = 0;
 		}
 	}
 
@@ -104,15 +102,13 @@ class Planet {
 	 * @param {Shuttle} shuttle 
 	 */
 	receiveShuttle(shuttle) {
-		if (this.owner) {
-			if (this.owner === shuttle.owner) {
-				this.shuttleCount += 1;
-			} else {
-				this.shuttleCount -= 1;
-			}
-		} else {
+		if (this.shuttleCount <= 0) {
 			this.owner = shuttle.owner;
 		}
-
+		if (this.owner === shuttle.owner) {
+			this.shuttleCount += 1;
+		} else {
+			this.shuttleCount -= 1;
+		}
 	}
 }
