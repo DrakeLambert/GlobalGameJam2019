@@ -58,6 +58,8 @@ class Planet {
 		text(this.shuttleCount, this.x, this.y + 50);
 		pop();
 
+
+
 		// select circle
 		push();
 		if (this.selected) {
@@ -101,21 +103,15 @@ class Planet {
 			this.shuttleCount += 1;
 		} else if (this.owner) {
 			this.shuttleCount -= 1;
-			this.impact(shuttle);
+			new Explosion(shuttle);
 		} else {
 			this.shuttleCount -= 2;
-			this.impact(shuttle);
+			new Explosion(shuttle);
 		}
 		if (this.shuttleCount <= 0) {
 			onPlanetClaimed.trigger(this, shuttle.owner);
 			this.shuttleCount = 0;
 		}
-	}
-
-	impact(shuttle) {
-		let img = loadImage('./media/explosion.png');
-		imageMode(CENTER);
-		image(img,shuttle.x,shuttle.y,500,500);
 	}
 
 	onPlanetClaimed(args) {

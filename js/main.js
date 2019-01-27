@@ -9,9 +9,12 @@ let mainPlayer;
 /** @type {AI} */
 let ai;
 
+let explosion;
+
 function preload() {
 	soundFormats('wav');
 	song = loadSound('./media/GameJam.mp3');
+	explosion = loadImage('./media/explosion.png')
 }
 
 function setup() {
