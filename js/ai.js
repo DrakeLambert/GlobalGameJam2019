@@ -1,6 +1,6 @@
 class AI {
 	constructor() {
-		let shuttle = loadImage('./media/shuttle-enemy1.png');
+		let shuttle = loadImage('./media/shuttle-enemy.png');
 		this.player = new Player('salmon', shuttle);
 		this.attackSpeed = 5000;
 		this.attackProb = .8;

@@ -10,11 +10,13 @@ let mainPlayer;
 let ai;
 
 let explosion;
+let plus;
 
 function preload() {
 	soundFormats('wav');
 	song = loadSound('./media/GameJam.mp3');
-	explosion = loadImage('./media/explosion.png')
+	explosion = loadImage('./media/explosion.png');
+	plus = loadImage('./media/plus.png');
 }
 
 function setup() {

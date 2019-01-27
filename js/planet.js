@@ -101,12 +101,13 @@ class Planet {
 	receiveShuttle(shuttle) {
 		if (this.owner === shuttle.owner) {
 			this.shuttleCount += 1;
+			new Explosion(shuttle,true)
 		} else if (this.owner) {
 			this.shuttleCount -= 1;
-			new Explosion(shuttle);
+			new Explosion(shuttle,false);
 		} else {
 			this.shuttleCount -= 2;
-			new Explosion(shuttle);
+			new Explosion(shuttle,false);
 		}
 		if (this.shuttleCount <= 0) {
 			onPlanetClaimed.trigger(this, shuttle.owner);
