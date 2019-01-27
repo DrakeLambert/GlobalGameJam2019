@@ -3,11 +3,11 @@ class Planet {
 		this.x = x;
 		this.y = y;
 		this.diameter = 50;
-		this.shuttleCount = Math.floor(randomGaussian(10, 2));
+		this.shuttleCount = Math.floor(randomGaussian(7, 2));
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
-		this.spawnRate = constrain(Math.floor(randomGaussian(3000, 1000)), 500, 5000);
+		this.spawnRate = constrain(Math.floor(randomGaussian(3000, 1000)), 500, 4000);
 		this.spawner = setInterval(this.spawnShuttle.bind(this), this.spawnRate);
 		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
 		/**@type {Planet} */
