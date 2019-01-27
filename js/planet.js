@@ -1,5 +1,5 @@
 class Planet {
-	constructor(x, y,num) {
+	constructor(x, y, num) {
 		this.x = x;
 		this.y = y;
 		this.diameter = 50;
@@ -13,7 +13,7 @@ class Planet {
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
-		this.img = loadImage(`../media/planet-${num === 0 ? 0 : ((num)%6)+1}.png`);
+		this.img = loadImage(`./media/planet-${num === 0 ? 0 : ((num) % 6) + 1}.png`);
 
 		this.onSelected = new Trigger();
 
@@ -47,7 +47,7 @@ class Planet {
 		// 	fill('whitesmoke');
 		// }
 		// // ellipse(this.x, this.y, this.diameter, this.diameter);
-		image(this.img,this.x-25,this.y-25,this.diameter,this.diameter);
+		image(this.img, this.x - 25, this.y - 25, this.diameter, this.diameter);
 		pop();
 
 		// shuttle count
@@ -58,11 +58,11 @@ class Planet {
 		} else {
 			fill('whitesmoke');
 		}
-		rect(this.x-25, this.y+36, 50,24,5);
+		rect(this.x - 25, this.y + 36, 50, 24, 5);
 		textSize(20);
 		fill('black');
 		textAlign(CENTER, CENTER);
-		text(this.shuttleCount, this.x, this.y+50);
+		text(this.shuttleCount, this.x, this.y + 50);
 		pop();
 
 		// selected
