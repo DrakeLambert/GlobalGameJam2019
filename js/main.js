@@ -2,8 +2,12 @@ const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
 let song;
+/** @type {MainPlayer} */
 let mainPlayer;
+/** @type {AI} */
 let ai;
+/**@type {Planet[]} */
+let planets;
 
 function preload() {
 	soundFormats('wav');
