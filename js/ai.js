@@ -3,8 +3,8 @@ class AI {
 		let shuttle = loadImage('./media/shuttle-enemy1.png');
 		this.player = new Player('salmon', shuttle);
 		this.attackSpeed = 5000;
-		this.attackProb = .6;
-		this.conserveProb = .3;
+		this.attackProb = .5;
+		this.conserveProb = .8;
 		window.setTimeout(this.attackLoop.bind(this), 2000);
 	}
 
@@ -17,23 +17,30 @@ class AI {
 	attackNearestPlanet() {
 		let pair = this.getNearestPlanets();
 		if (pair) {
-			this.player.planets.forEach(planet => {
-				if (Math.random() < this.attackProb) {
+			this.player.planets
+				.filter(_ => Math.random() < this.attackProb)
+				.forEach(planet => {
 					this.player.selectPlanet([planet]);
 					this.player.selectPlanet([pair.opposingPlanet]);
-				}
-			});
+				});
 		}
 	}
 
 	conserveShuttles() {
 		if (this.player.planets.length > 2) {
 			this.player.planets
-				.filter(planet => planet.shuttleCount < 5)
+				.filter(planet => planet.shuttleCount < 7)
 				.filter(_ => Math.random() < this.conserveProb)
 				.forEach(planet => {
-					this.player.selectPlanet([planet]);
-					this.player.selectPlanet([planet]);
+					if (Math.random() > .5) {
+						this.player.selectPlanet([planet]);
+						this.player.selectPlanet([planet]);
+					} else {
+						var index = Math.floor(Math.random() * this.player.planets.length);
+						this.player.selectPlanet([this.player.planets[index]])
+						this.player.selectPlanet([planet]);
+						this.player.selectPlanet([planet]);
+					}
 				});
 		}
 	}

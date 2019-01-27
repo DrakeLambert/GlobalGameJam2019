@@ -49,7 +49,7 @@ function setup() {
 	mainPlayer = new MainPlayer();
 	ai = new AI();
 	onPlanetClaimed.trigger(planets[0], mainPlayer.player);
-	planets[1].shuttleCount = planets[0].shuttleCount * 2;
+	planets[1].shuttleCount = planets[0].shuttleCount * 3;
 	onPlanetClaimed.trigger(planets[1], ai.player);
 
 	// Create satellites
