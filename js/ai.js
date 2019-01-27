@@ -7,7 +7,7 @@ class AI {
 		this.conserveProb = .8;
 		this.lastAttackTime = Date.now();
 
-		onDraw.subscribe(this.attackLoop.bind(this));
+		this.attackLooper = onDraw.subscribe(this.attackLoop.bind(this));
 	}
 
 	attackLoop() {

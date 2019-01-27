@@ -20,6 +20,7 @@ class GameState {
 
 	stopGameMovement() {
 		onPlanetSelectedGlobal.unsubscribe(mainPlayer.onSelected);
+		onDraw.unsubscribe(ai.attackLooper);
 		planets.forEach(planet => {
 			planet.targetPlanet = null;
 			planet.selected = false;
