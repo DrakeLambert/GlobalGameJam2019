@@ -6,7 +6,7 @@ class Player {
 		this.lastSelectedPlanet = null;
 
 		onPlanetClaimed.subscribe(this.claimPlanet.bind(this));
-		onPlanetSelectedGlobal.subscribe(this.selectPlanet.bind(this));
+		// onPlanetSelectedGlobal.subscribe(this.selectPlanet.bind(this));
 	}
 
 	claimPlanet(args) {
@@ -18,6 +18,8 @@ class Player {
 			if (!this.planets.includes(planet)) {
 				this.planets.push(planet);
 			}
+		} else if (this.planets.includes(planet)) {
+			this.ditchPlanet(planet);
 		}
 	}
 

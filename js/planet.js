@@ -19,14 +19,7 @@ class Planet {
 
 		onDraw.subscribe(this.draw.bind(this));
 		onMouseClicked.subscribe(this.mouseClicked.bind(this));
-
-		onPlanetClaimed.subscribe(((args) => {
-			let planet = args[0];
-			let player = args[1];
-			if (planet === this) {
-				this.owner = player;
-			}
-		}).bind(this));
+		onPlanetClaimed.subscribe(this.onPlanetClaimed.bind(this));
 	}
 
 	spawnShuttle() {
@@ -120,6 +113,18 @@ class Planet {
 		}
 		if (this.shuttleCount <= 0) {
 			onPlanetClaimed.trigger(this, shuttle.owner);
+			this.shuttleCount = 0;
+		}
+	}
+
+	onPlanetClaimed(args) {
+		/** @type {Planet} */
+		let planet = args[0];
+		/** @type {Player} */
+		let player = args[1];
+		if (planet === this) {
+			this.owner = player;
+			this.targetPlanet = null;
 		}
 	}
 }
