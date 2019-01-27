@@ -3,7 +3,7 @@ class AI {
 		let shuttle = loadImage('./media/shuttle-enemy1.png');
 		this.player = new Player('salmon', shuttle);
 		this.attackSpeed = 5000;
-		this.attackProb = .5;
+		this.attackProb = .8;
 		this.conserveProb = .8;
 		window.setTimeout(this.attackLoop.bind(this), 2000);
 	}
@@ -29,7 +29,6 @@ class AI {
 	conserveShuttles() {
 		if (this.player.planets.length > 2) {
 			this.player.planets
-				.filter(planet => planet.shuttleCount < 7)
 				.filter(_ => Math.random() < this.conserveProb)
 				.forEach(planet => {
 					if (Math.random() > .5) {
