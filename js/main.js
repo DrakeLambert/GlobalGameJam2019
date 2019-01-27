@@ -2,10 +2,12 @@ const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
 let song;
+let mainPlayer;
+let ai;
 
 function preload() {
 	soundFormats('wav');
-	song = loadSound('../media/GameJam.mp3');
+	// song = loadSound('../media/GameJam.mp3');
 }
 
 function setup() {
@@ -19,12 +21,13 @@ function setup() {
 	let planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30)));
 
 	// Create player
-	let mainPlayer = new Player('cornflowerblue');
-	planets[0].shuttleCount = 5;
-	onPlanetClaimed.trigger(planets[0], mainPlayer);
+	mainPlayer = new MainPlayer();
+	ai = new AI();
+	onPlanetClaimed.trigger(planets[0], mainPlayer.player);
+	onPlanetClaimed.trigger(planets[1], ai.player);
 
 	// Create satellites
-	new Satellite(mainPlayer, planets[0]);
+	new Satellite(mainPlayer.player, planets[0]);
 }
 
 const onDraw = new Trigger();
