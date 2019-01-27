@@ -6,7 +6,7 @@ class Planet {
 		this.shuttleCount = Math.floor(randomGaussian(7, 2));
 		this.satelliteCount = 0;
 		this.satellites = [];
-		this.maxSatellites = 10;
+		this.maxSatellites = 7;
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
