@@ -53,20 +53,29 @@ function setup() {
 		planets.push(new Planet(newX, newY, i));
 	}
 
+	// Find farthest planets
+	let maxDistance = 0;
+	let planet1 = null;
+	let planet2 = null;
+	for (let i = 0; i < planets.length; i++) {
+		for (let j = i + 1; j < planets.length; j++) {
+			var distance = dist(planets[i].x, planets[i].y, planets[j].x, planets[j].y);
+			if (distance > maxDistance) {
+				maxDistance = distance;
+				planet1 = planets[i];
+				planet2 = planets[j];
+			}
+		}
+	}
+
 	// Create player
 	mainPlayer = new MainPlayer();
-	onPlanetClaimed.trigger(planets[0], mainPlayer.player);
-	mainPlayer.player.selectPlanet([planets[0]]);
+	onPlanetClaimed.trigger(planet1, mainPlayer.player);
+	mainPlayer.player.selectPlanet([planet1]);
 
 	ai = new AI();
-	planets[1].shuttleCount = planets[0].shuttleCount * 3;
-	onPlanetClaimed.trigger(planets[1], ai.player);
-
-	// Create satellites
-	// new Satellite(mainPlayer.player, planets[0]);
-
-	// Create pause button
-	// new Pause(40, 40);
+	planet2.shuttleCount = planet2.shuttleCount * 3;
+	onPlanetClaimed.trigger(planet2, ai.player);
 }
 
 const onDraw = new Trigger();
