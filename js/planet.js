@@ -11,8 +11,8 @@ class Planet {
 		this.owner = null;
 		this.selected = false;
 		this.spawnRate = constrain(Math.floor(randomGaussian(3000, 1000)), 500, 4000);
-		this.spawner = setInterval(this.spawnShuttle.bind(this), this.spawnRate);
-		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
+		this.lastSpawn = Date.now();
+		this.lastDeploy = Date.now();
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
@@ -21,28 +21,37 @@ class Planet {
 		this.onSelected = new Trigger();
 
 		onDraw.subscribe(this.draw.bind(this));
+		onDraw.subscribe(this.spawnShuttle.bind(this));
+		onDraw.subscribe(this.deployShuttle.bind(this));
 		onMouseClicked.subscribe(this.mouseClicked.bind(this));
 		onPlanetClaimed.subscribe(this.onPlanetClaimed.bind(this));
 	}
 
 	spawnShuttle() {
-		this.shuttleCount += 1;
-		this.checkSatellite();
+		let now = Date.now();
+		if (now - this.lastSpawn > this.spawnRate) {
+			this.shuttleCount += 1;
+			this.checkSatellite();
+			this.lastSpawn = now;
+		}
 	}
 
 	deployShuttle() {
-		if (this.targetPlanet) {
-			if (this.shuttleCount > 0) {
-				this.shuttleCount -= 1;
-				new Shuttle(this.owner, this.targetPlanet, this.x, this.y);
+		let now = Date.now();
+		if (now - this.lastDeploy > 400) {
+			if (this.targetPlanet) {
+				if (this.shuttleCount > 0) {
+					this.shuttleCount -= 1;
+					new Shuttle(this.owner, this.targetPlanet, this.x, this.y);
+				}
 			}
 		}
 	}
 
 	checkSatellite() {
 		if (this.satelliteCount <= this.maxSatellites) {
-			if (this.owner && Math.floor(this.shuttleCount / 15) >= this.satelliteCount+1) {
-				this.satellites.push(new Satellite(this.owner,this));
+			if (this.owner && Math.floor(this.shuttleCount / 15) >= this.satelliteCount + 1) {
+				this.satellites.push(new Satellite(this.owner, this));
 				this.satelliteCount++;
 			}
 		}
@@ -112,14 +121,14 @@ class Planet {
 	receiveShuttle(shuttle) {
 		if (this.owner === shuttle.owner) {
 			this.shuttleCount += 1;
-			new Explosion(shuttle,true);
+			new Explosion(shuttle, true);
 			this.checkSatellite();
 		} else if (this.owner) {
 			this.shuttleCount -= 1;
-			new Explosion(shuttle,false);
+			new Explosion(shuttle, false);
 		} else {
 			this.shuttleCount -= 2;
-			new Explosion(shuttle,false);
+			new Explosion(shuttle, false);
 		}
 		if (this.shuttleCount <= 0) {
 			onPlanetClaimed.trigger(this, shuttle.owner);
