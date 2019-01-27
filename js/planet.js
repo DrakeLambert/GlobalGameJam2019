@@ -1,8 +1,8 @@
 class Planet {
-	constructor(x, y) {
+	constructor(x, y,num) {
 		this.x = x;
 		this.y = y;
-		this.diameter = 30;
+		this.diameter = 50;
 		this.shuttleCount = Math.floor(randomGaussian(10, 2));
 		/**@type {Player} */
 		this.owner = null;
@@ -12,6 +12,8 @@ class Planet {
 		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
 		/**@type {Planet} */
 		this.targetPlanet = null;
+
+		this.img = loadImage(`../media/planet-${num === 0 ? 0 : ((num)%6)+1}.png`);
 
 		this.onSelected = new Trigger();
 
@@ -44,22 +46,30 @@ class Planet {
 
 		// box
 		push();
-		stroke('black');
-		strokeWeight(2);
-		if (this.owner) {
-			fill(this.owner.color);
-		} else {
-			fill('whitesmoke');
-		}
-		ellipse(this.x, this.y, this.diameter, this.diameter);
+		// stroke('black');
+		// strokeWeight(2);
+		// if (this.owner) {
+		// 	fill(this.owner.color);
+		// } else {
+		// 	fill('whitesmoke');
+		// }
+		// // ellipse(this.x, this.y, this.diameter, this.diameter);
+		image(this.img,this.x-25,this.y-25,this.diameter,this.diameter);
 		pop();
 
 		// shuttle count
 		push();
 		noStroke();
+		if (this.owner) {
+			fill(this.owner.color);
+		} else {
+			fill('whitesmoke');
+		}
+		rect(this.x-25, this.y+36, 50,24,5);
+		textSize(20);
 		fill('black');
 		textAlign(CENTER, CENTER);
-		text(this.shuttleCount, this.x, this.y);
+		text(this.shuttleCount, this.x, this.y+50);
 		pop();
 
 		// selected

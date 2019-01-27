@@ -1,7 +1,6 @@
 const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
-let song;
 
 function preload() {
 	soundFormats('wav');
@@ -13,10 +12,10 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 
 	// Create background
-	new Background();
+	new Background(); 
 
 	// Create planets
-	let planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30)));
+	let planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30),i));
 
 	// Create player
 	let mainPlayer = new Player('cornflowerblue');
