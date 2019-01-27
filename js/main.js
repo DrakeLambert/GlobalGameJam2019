@@ -75,6 +75,7 @@ function setup() {
 	mainPlayer = new MainPlayer();
 	onPlanetClaimed.trigger(planet1, mainPlayer.player);
 	mainPlayer.player.selectPlanet([planet1]);
+	planet1.img = loadImage(`./media/planet-0.png`);
 
 	ai = new AI();
 	planet2.shuttleCount = planet2.shuttleCount * 3;

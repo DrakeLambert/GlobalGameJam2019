@@ -16,7 +16,7 @@ class Planet {
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
-		this.img = loadImage(`./media/planet-${num === 0 ? 0 : ((num) % 6) + 1}.png`);
+		this.img = loadImage(`./media/planet-${num % 6 + 1}.png`);
 
 		this.onSelected = new Trigger();
 
