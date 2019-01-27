@@ -58,8 +58,6 @@ class Planet {
 		text(this.shuttleCount, this.x, this.y + 50);
 		pop();
 
-
-
 		// select circle
 		push();
 		if (this.selected) {
