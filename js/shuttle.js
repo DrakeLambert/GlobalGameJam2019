@@ -1,5 +1,5 @@
 class Shuttle {
-	constructor(owner, destination, x, y) {
+	constructor(owner, destination, x, y, shuttle) {
 		/**@type {Player} */
 		this.owner = owner;
 		/**@type {Planet} */
@@ -15,6 +15,9 @@ class Shuttle {
 		/**@type {Number} */
 		this.acceleration = 0.04;
 
+		this.shuttle = shuttle;
+		this.slope;
+
 		this.onUpdatePosition = onUpdatePosition.subscribe(this.updatePosition.bind(this));
 		this.onDraw = onDraw.subscribe(this.draw.bind(this));
 	}
@@ -23,11 +26,15 @@ class Shuttle {
 			this.velocity += this.acceleration;
 		}
 		let slope = atan((this.destination.y - this.y) / (this.destination.x - this.x));
+		this.slope = slope*180/PI;
 		let dX = cos(slope) * this.velocity;
 		let dY = sin(slope) * this.velocity;
 		if (this.x > this.destination.x) {
 			dX *= -1;
 			dY *= -1;
+			this.slope-=90;
+		} else {
+			this.slope+=90;
 		}
 		this.x += dX;
 		this.y += dY;
@@ -44,10 +51,12 @@ class Shuttle {
 
 	draw() {
 		push();
-		fill(this.owner.color);
-		stroke('black');
-		strokeWeight(1);
-		ellipse(this.x, this.y, 10, 10);
+		imageMode(CENTER);
+		angleMode(DEGREES);
+		translate(this.x, this.y);
+		rotate(this.slope);
+		image(this.shuttle,0,0, 20, 20);
+		angleMode(RADIANS);
 		pop();
 	}
 }

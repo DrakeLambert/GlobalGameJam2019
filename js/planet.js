@@ -13,7 +13,8 @@ class Planet {
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
-		this.img = loadImage(`../media/planet-${num === 0 ? 0 : ((num)%6)+1}.png`);
+		this.img = loadImage(`./media/planet-${num === 0 ? 0 : ((num)%6)+1}.png`);
+		this.shuttle = loadImage('./media/shuttle.png');
 
 		this.onSelected = new Trigger();
 
@@ -30,7 +31,7 @@ class Planet {
 		if (this.targetPlanet) {
 			if (this.shuttleCount > 0) {
 				this.shuttleCount -= 1;
-				new Shuttle(this.owner, this.targetPlanet, this.x, this.y);
+				new Shuttle(this.owner, this.targetPlanet, this.x, this.y, this.shuttle);
 			}
 		}
 	}

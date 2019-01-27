@@ -18,12 +18,12 @@ class Background {
     }
 
     draw() {
+        push();
         background('black');
         if (this.angle >= 2 * PI) this.angle = 0;
         else this.angle += .005;
 		this.x = cos(this.angle);
-		this.y = sin(this.angle);
-        push();
+        this.y = sin(this.angle);
         for (let i=0; i < 334; i++) {
             circle(this.stars1[i].x-((mouseX*1)/80)*this.x, this.stars1[i].y-((mouseY*1)/80)*this.y,1);
             circle(this.stars2[i].x-((mouseX*2)/80)*this.x, this.stars2[i].y-((mouseY*2)/80)*this.y,1.5);
