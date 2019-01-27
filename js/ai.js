@@ -5,13 +5,18 @@ class AI {
 		this.attackSpeed = 5000;
 		this.attackProb = .8;
 		this.conserveProb = .8;
-		window.setTimeout(this.attackLoop.bind(this), 2000);
+		this.lastAttackTime = Date.now();
+
+		onDraw.subscribe(this.attackLoop.bind(this));
 	}
 
 	attackLoop() {
-		this.attackNearestPlanet();
-		this.conserveShuttles();
-		window.setTimeout(this.attackLoop.bind(this), this.attackSpeed);
+		let now = Date.now();
+		if (now - this.lastAttackTime > 2000) {
+			this.attackNearestPlanet();
+			this.conserveShuttles();
+			this.lastAttackTime = now;
+		}
 	}
 
 	attackNearestPlanet() {

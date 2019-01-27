@@ -54,7 +54,7 @@ function setup() {
 	mainPlayer = new MainPlayer();
 	onPlanetClaimed.trigger(planets[0], mainPlayer.player);
 	mainPlayer.player.selectPlanet([planets[0]]);
-	
+
 	ai = new AI();
 	planets[1].shuttleCount = planets[0].shuttleCount * 3;
 	onPlanetClaimed.trigger(planets[1], ai.player);
@@ -71,9 +71,6 @@ function draw() {
 	onUpdatePosition.trigger();
 	onDraw.trigger();
 }
-function touchStarted() {
-	draw();
-}
 
 const onMouseClicked = new Trigger();
 function mouseClicked() {
@@ -83,4 +80,7 @@ function mouseClicked() {
 		song.loop();
 		song.play();
 	}
+}
+function touchStarted() {
+	mouseClicked();
 }
