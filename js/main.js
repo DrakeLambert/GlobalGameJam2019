@@ -50,13 +50,18 @@ function setup() {
 
 	// Create player
 	mainPlayer = new MainPlayer();
-	ai = new AI();
 	onPlanetClaimed.trigger(planets[0], mainPlayer.player);
+	mainPlayer.player.selectPlanet([planets[0]]);
+	
+	ai = new AI();
 	planets[1].shuttleCount = planets[0].shuttleCount * 3;
 	onPlanetClaimed.trigger(planets[1], ai.player);
 
 	// Create satellites
 	new Satellite(mainPlayer.player, planets[0]);
+
+	// Create pause button
+	// new Pause(40, 40);
 }
 
 const onDraw = new Trigger();
