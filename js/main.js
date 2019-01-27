@@ -54,6 +54,9 @@ function setup() {
 
 	// Create satellites
 	new Satellite(mainPlayer.player, planets[0]);
+
+	// Create pause button
+	// new Pause(40, 40);
 }
 
 const onDraw = new Trigger();
