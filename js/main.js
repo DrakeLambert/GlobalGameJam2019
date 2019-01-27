@@ -22,7 +22,7 @@ function setup() {
 	new Background();
 
 	// Create planets
-	let planetCount = 10;
+	let planetCount = 40;
 	for (let i = 0; i < planetCount; i++) {
 		let newX;
 		let newY;
@@ -49,6 +49,7 @@ function setup() {
 	mainPlayer = new MainPlayer();
 	ai = new AI();
 	onPlanetClaimed.trigger(planets[0], mainPlayer.player);
+	planets[1].shuttleCount = planets[0].shuttleCount * 2;
 	onPlanetClaimed.trigger(planets[1], ai.player);
 
 	// Create satellites
