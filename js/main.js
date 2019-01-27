@@ -26,6 +26,9 @@ function setup() {
 	document.body.style.margin = 0;
 	createCanvas(windowWidth, windowHeight);
 
+	//set framerate
+	frameRate(30);
+
 	// Create background
 	new Background();
 
