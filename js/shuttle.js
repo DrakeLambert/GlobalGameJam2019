@@ -1,5 +1,5 @@
 class Shuttle {
-	constructor(owner, destination, x, y, shuttle) {
+	constructor(owner, destination, x, y) {
 		/**@type {Player} */
 		this.owner = owner;
 		/**@type {Planet} */
@@ -15,7 +15,6 @@ class Shuttle {
 		/**@type {Number} */
 		this.acceleration = 0.04;
 
-		this.shuttle = shuttle;
 		this.slope;
 
 		this.onUpdatePosition = onUpdatePosition.subscribe(this.updatePosition.bind(this));
@@ -55,7 +54,7 @@ class Shuttle {
 		angleMode(DEGREES);
 		translate(this.x, this.y);
 		rotate(this.slope);
-		image(this.shuttle,0,0, 20, 20);
+		image(this.owner.shuttleIMG,0,0, 20, 20);
 		angleMode(RADIANS);
 		pop();
 	}

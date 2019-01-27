@@ -1,6 +1,7 @@
 class MainPlayer {
 	constructor() {
-		this.player = new Player('cornflowerblue');
+		let shuttle = loadImage('./media/shuttle.png');
+		this.player = new Player('cornflowerblue', shuttle);
 		onPlanetSelectedGlobal.subscribe(this.player.selectPlanet.bind(this.player));
 	}
 }

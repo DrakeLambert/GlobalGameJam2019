@@ -1,10 +1,12 @@
 class Player {
-	constructor(color) {
+	constructor(color, shuttle) {
 		this.color = color;
 		/** @type {Planet[]} */
 		this.planets = [];
 		/** @type {Planet} */
 		this.lastSelectedPlanet = null;
+
+		this.shuttleIMG = shuttle;
 
 		onPlanetClaimed.subscribe(this.claimPlanet.bind(this));
 		// onPlanetSelectedGlobal.subscribe(this.selectPlanet.bind(this));
