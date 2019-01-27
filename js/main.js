@@ -11,12 +11,15 @@ let ai;
 
 let explosion;
 let plus;
+let satelliteIMG = [];
 
 function preload() {
 	soundFormats('wav');
 	song = loadSound('./media/GameJam.mp3');
 	explosion = loadImage('./media/explosion.png');
 	plus = loadImage('./media/plus.png');
+	satelliteIMG[0] = loadImage('./media/satellite-0.png');
+	satelliteIMG[1] = loadImage('./media/satellite-1.png');
 }
 
 function setup() {
@@ -73,7 +76,7 @@ function draw() {
 }
 
 const onMouseClicked = new Trigger();
-function mousePressed() {
+function mouseClicked() {
 	onMouseClicked.trigger();
 	if (!song.isPlaying() && song.isLoaded()) {
 		song.setVolume(0.5);

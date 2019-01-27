@@ -1,3 +1,7 @@
 https://github.com/processing/p5.js/blob/master/license.txt
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/monkik" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+<a href="https://icons8.com/icon/63650/plus">Plus icon by Icons8</a>
+
+Blood _ Copyright 2011 by shimobayashi <http://opengameart.org/content/teqq-princess-image-materials> Color edit to look like explosion Copyright 2012 by qubodup <http://opengameart.org/users/qubodup> License: CCBY3 or later <http://creativecommons.org/licenses/by/3.0/>

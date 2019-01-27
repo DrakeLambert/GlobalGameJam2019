@@ -4,6 +4,9 @@ class Planet {
 		this.y = y;
 		this.diameter = 50;
 		this.shuttleCount = Math.floor(randomGaussian(7, 2));
+		this.satelliteCount = 0;
+		this.satellites = [];
+		this.maxSatellites = 10;
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
@@ -24,6 +27,7 @@ class Planet {
 
 	spawnShuttle() {
 		this.shuttleCount += 1;
+		this.checkSatellite();
 	}
 
 	deployShuttle() {
@@ -31,6 +35,15 @@ class Planet {
 			if (this.shuttleCount > 0) {
 				this.shuttleCount -= 1;
 				new Shuttle(this.owner, this.targetPlanet, this.x, this.y);
+			}
+		}
+	}
+
+	checkSatellite() {
+		if (this.satelliteCount <= this.maxSatellites) {
+			if (this.owner && Math.floor(this.shuttleCount / 15) >= this.satelliteCount+1) {
+				this.satellites.push(new Satellite(this.owner,this));
+				this.satelliteCount++;
 			}
 		}
 	}
@@ -99,7 +112,8 @@ class Planet {
 	receiveShuttle(shuttle) {
 		if (this.owner === shuttle.owner) {
 			this.shuttleCount += 1;
-			new Explosion(shuttle,true)
+			new Explosion(shuttle,true);
+			this.checkSatellite();
 		} else if (this.owner) {
 			this.shuttleCount -= 1;
 			new Explosion(shuttle,false);
@@ -109,6 +123,7 @@ class Planet {
 		}
 		if (this.shuttleCount <= 0) {
 			onPlanetClaimed.trigger(this, shuttle.owner);
+			this.satellites.forEach(s => s.changeOwner(shuttle.owner));
 			this.shuttleCount = 0;
 		}
 	}
