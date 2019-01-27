@@ -39,7 +39,8 @@ class Planet {
 
 		// planet
 		push();
-		image(this.img, this.x - 25, this.y - 25, this.diameter, this.diameter);
+		imageMode(CENTER);
+		image(this.img, this.x, this.y, this.diameter, this.diameter);
 		pop();
 
 		// shuttle count
@@ -100,13 +101,21 @@ class Planet {
 			this.shuttleCount += 1;
 		} else if (this.owner) {
 			this.shuttleCount -= 1;
+			this.impact(shuttle);
 		} else {
 			this.shuttleCount -= 2;
+			this.impact(shuttle);
 		}
 		if (this.shuttleCount <= 0) {
 			onPlanetClaimed.trigger(this, shuttle.owner);
 			this.shuttleCount = 0;
 		}
+	}
+
+	impact(shuttle) {
+		let img = loadImage('./media/explosion.png');
+		imageMode(CENTER);
+		image(img,shuttle.x,shuttle.y,500,500);
 	}
 
 	onPlanetClaimed(args) {
