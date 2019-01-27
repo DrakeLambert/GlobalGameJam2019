@@ -1,5 +1,5 @@
 class Trigger {
-	constructor(source) {
+	constructor() {
 		this.listeners = [];
 	}
 	subscribe(func) {
