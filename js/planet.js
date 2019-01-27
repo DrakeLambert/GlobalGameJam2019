@@ -7,14 +7,13 @@ class Planet {
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
-		this.spawnRate = Math.floor(randomGaussian(3000, 1000));
+		this.spawnRate = constrain(Math.floor(randomGaussian(3000, 1000)), 500, 5000);
 		this.spawner = setInterval(this.spawnShuttle.bind(this), this.spawnRate);
 		this.deployer = setInterval(this.deployShuttle.bind(this), 400);
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
-		this.img = loadImage(`./media/planet-${num === 0 ? 0 : ((num)%6)+1}.png`);
-		
+		this.img = loadImage(`./media/planet-${num === 0 ? 0 : ((num) % 6) + 1}.png`);
 
 		this.onSelected = new Trigger();
 
