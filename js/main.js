@@ -22,7 +22,7 @@ function setup() {
 	new Background(); 
 
 	// Create planets
-	let planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30),i));
+	planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30),i));
 
 	// Create player
 	mainPlayer = new MainPlayer();
