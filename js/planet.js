@@ -1,5 +1,5 @@
 class Planet {
-	constructor(x, y,num) {
+	constructor(x, y, num) {
 		this.x = x;
 		this.y = y;
 		this.diameter = 50;
@@ -38,17 +38,9 @@ class Planet {
 
 	draw() {
 
-		// box
+		// planet
 		push();
-		// stroke('black');
-		// strokeWeight(2);
-		// if (this.owner) {
-		// 	fill(this.owner.color);
-		// } else {
-		// 	fill('whitesmoke');
-		// }
-		// // ellipse(this.x, this.y, this.diameter, this.diameter);
-		image(this.img,this.x-25,this.y-25,this.diameter,this.diameter);
+		image(this.img, this.x - 25, this.y - 25, this.diameter, this.diameter);
 		pop();
 
 		// shuttle count
@@ -59,19 +51,19 @@ class Planet {
 		} else {
 			fill('whitesmoke');
 		}
-		rect(this.x-25, this.y+36, 50,24,5);
+		rect(this.x - 25, this.y + 36, 50, 24, 5);
 		textSize(20);
 		fill('black');
 		textAlign(CENTER, CENTER);
-		text(this.shuttleCount, this.x, this.y+50);
+		text(this.shuttleCount, this.x, this.y + 50);
 		pop();
 
-		// selected
+		// select circle
 		push();
 		if (this.selected) {
 			noFill();
 			stroke('green');
-			strokeWeight(1);
+			strokeWeight(2);
 			circle(this.x, this.y, this.diameter / 2 + 5);
 		}
 		pop();
