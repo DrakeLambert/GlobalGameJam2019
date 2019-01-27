@@ -92,7 +92,7 @@ function draw() {
 }
 
 const onMouseClicked = new Trigger();
-function mouseClicked() {
+function mousePressed() {
 	onMouseClicked.trigger();
 	if (!song.isPlaying() && song.isLoaded()) {
 		song.setVolume(0.5);
