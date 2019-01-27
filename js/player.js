@@ -1,6 +1,7 @@
 class Player {
 	constructor(color) {
 		this.color = color;
+		/** @type {Planet[]} */
 		this.planets = [];
 		/** @type {Planet} */
 		this.lastSelectedPlanet = null;
