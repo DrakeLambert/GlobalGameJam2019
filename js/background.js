@@ -11,9 +11,9 @@ class Background {
         background('black');
         for (let i=0; i < 334; i++) {
 
-            this.stars1[i] = {x:Math.random()*(windowWidth+100), y:Math.random()*(windowHeight+100)};
-            this.stars2[i] = {x:Math.random()*(windowWidth+100), y:Math.random()*(windowHeight+100)};
-            this.stars3[i] = {x:Math.random()*(windowWidth+100), y:Math.random()*(windowHeight+100)};
+            this.stars1[i] = {x:Math.random()*(windowWidth+100)-50, y:Math.random()*(windowHeight+100)-50};
+            this.stars2[i] = {x:Math.random()*(windowWidth+100)-50, y:Math.random()*(windowHeight+100)-50};
+            this.stars3[i] = {x:Math.random()*(windowWidth+100)-50, y:Math.random()*(windowHeight+100)-50};
         }
     }
 
