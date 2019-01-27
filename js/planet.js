@@ -45,6 +45,7 @@ class Planet {
 					new Shuttle(this.owner, this.targetPlanet, this.x, this.y);
 				}
 			}
+			this.lastDeploy = now;
 		}
 	}
 
