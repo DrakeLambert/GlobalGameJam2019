@@ -55,6 +55,11 @@ class AI {
 		let minimumDistance = Number.POSITIVE_INFINITY;
 		let closestPair = null;
 
+		if (mainPlayer.player.planets.length > 4 && Math.random() < .1) {
+			let index = Math.floor(mainPlayer.player.planets.length * Math.random());
+			return new Pair(this.player.planets[0], mainPlayer.player.planets[index]);
+		}
+
 		let otherPlanets = planets.filter(planet => !this.player.planets.includes(planet));
 		this.player.planets.forEach(aiPlanet => {
 			otherPlanets.forEach(otherPlanet => {
