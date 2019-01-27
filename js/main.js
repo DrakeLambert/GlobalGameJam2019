@@ -60,7 +60,7 @@ function setup() {
 	onPlanetClaimed.trigger(planets[1], ai.player);
 
 	// Create satellites
-	new Satellite(mainPlayer.player, planets[0]);
+	// new Satellite(mainPlayer.player, planets[0]);
 
 	// Create pause button
 	// new Pause(40, 40);
@@ -73,14 +73,11 @@ function draw() {
 }
 
 const onMouseClicked = new Trigger();
-function mouseClicked() {
+function mousePressed() {
 	onMouseClicked.trigger();
 	if (!song.isPlaying() && song.isLoaded()) {
 		song.setVolume(0.5);
 		song.loop();
 		song.play();
 	}
-}
-function touchStarted() {
-	mouseClicked();
 }

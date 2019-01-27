@@ -41,9 +41,8 @@ class AI {
 						this.player.selectPlanet([planet]);
 					} else {
 						var index = Math.floor(Math.random() * this.player.planets.length);
+						this.player.selectPlanet([planet]);
 						this.player.selectPlanet([this.player.planets[index]])
-						this.player.selectPlanet([planet]);
-						this.player.selectPlanet([planet]);
 					}
 				});
 		}
