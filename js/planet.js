@@ -3,7 +3,7 @@ class Planet {
 		this.x = x;
 		this.y = y;
 		this.diameter = 50;
-		this.shuttleCount = Math.floor(randomGaussian(10, 2));
+		this.shuttleCount = Math.floor(randomGaussian(7, 2));
 		/**@type {Player} */
 		this.owner = null;
 		this.selected = false;
