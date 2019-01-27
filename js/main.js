@@ -80,6 +80,9 @@ function setup() {
 	ai = new AI();
 	planet2.shuttleCount = planet2.shuttleCount * 3;
 	onPlanetClaimed.trigger(planet2, ai.player);
+
+	// Start game state
+	new GameState();
 }
 
 const onDraw = new Trigger();
