@@ -1,13 +1,13 @@
 const onPlanetClaimed = new Trigger();
 const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
+/**@type {Planet[]} */
+const planets = [];
 let song;
 /** @type {MainPlayer} */
 let mainPlayer;
 /** @type {AI} */
 let ai;
-/**@type {Planet[]} */
-let planets;
 
 function preload() {
 	soundFormats('wav');
@@ -22,7 +22,28 @@ function setup() {
 	new Background();
 
 	// Create planets
-	planets = [...Array(10).keys()].map(i => new Planet(constrain(Math.random() * width, 30, width - 30), constrain(Math.random() * height, 30, height - 30), i));
+	let planetCount = 10;
+	for (let i = 0; i < planetCount; i++) {
+		let newX;
+		let newY;
+		while (true) {
+			newX = constrain(Math.random() * width, 40, width - 40);
+			newY = constrain(Math.random() * height, 40, height - 70);
+
+			let tooClose = false;
+			for (let planet of planets) {
+				tooClose = dist(newX, newY, planet.x, planet.y) < planet.diameter * 2;
+				if (tooClose) {
+					break;
+				}
+			}
+
+			if (!tooClose) {
+				break;
+			}
+		}
+		planets.push(new Planet(newX, newY, i));
+	}
 
 	// Create player
 	mainPlayer = new MainPlayer();

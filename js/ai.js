@@ -2,24 +2,38 @@ class AI {
 	constructor() {
 		this.player = new Player('salmon');
 		this.attackSpeed = 5000;
+		this.attackProb = .6;
+		this.conserveProb = .3;
 		window.setTimeout(this.attackLoop.bind(this), 2000);
 	}
 
 	attackLoop() {
 		this.attackNearestPlanet();
+		this.conserveShuttles();
 		window.setTimeout(this.attackLoop.bind(this), this.attackSpeed);
 	}
 
 	attackNearestPlanet() {
 		let pair = this.getNearestPlanets();
-
 		if (pair) {
 			this.player.planets.forEach(planet => {
-				if (Math.random() > .5) {
+				if (Math.random() < this.attackProb) {
 					this.player.selectPlanet([planet]);
 					this.player.selectPlanet([pair.opposingPlanet]);
 				}
 			});
+		}
+	}
+
+	conserveShuttles() {
+		if (this.player.planets.length > 2) {
+			this.player.planets
+				.filter(planet => planet.shuttleCount < 5)
+				.filter(_ => Math.random() < this.conserveProb)
+				.forEach(planet => {
+					this.player.selectPlanet([planet]);
+					this.player.selectPlanet([planet]);
+				});
 		}
 	}
 

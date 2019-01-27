@@ -37,16 +37,8 @@ class Planet {
 
 	draw() {
 
-		// box
+		// planet
 		push();
-		// stroke('black');
-		// strokeWeight(2);
-		// if (this.owner) {
-		// 	fill(this.owner.color);
-		// } else {
-		// 	fill('whitesmoke');
-		// }
-		// // ellipse(this.x, this.y, this.diameter, this.diameter);
 		image(this.img, this.x - 25, this.y - 25, this.diameter, this.diameter);
 		pop();
 
@@ -65,12 +57,12 @@ class Planet {
 		text(this.shuttleCount, this.x, this.y + 50);
 		pop();
 
-		// selected
+		// select circle
 		push();
 		if (this.selected) {
 			noFill();
 			stroke('green');
-			strokeWeight(1);
+			strokeWeight(2);
 			circle(this.x, this.y, this.diameter / 2 + 5);
 		}
 		pop();
