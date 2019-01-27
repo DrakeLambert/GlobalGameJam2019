@@ -22,7 +22,7 @@ function setup() {
 	new Background();
 
 	// Create planets
-	let planetCount = 40;
+	let planetCount = 20;
 	for (let i = 0; i < planetCount; i++) {
 		let newX;
 		let newY;
