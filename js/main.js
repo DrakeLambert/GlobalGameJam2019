@@ -3,12 +3,12 @@ const onPlanetSelectedGlobal = new Trigger();
 const onUpdatePosition = new Trigger();
 /**@type {Planet[]} */
 const planets = [];
-let song;
 /** @type {MainPlayer} */
 let mainPlayer;
 /** @type {AI} */
 let ai;
 
+let song, buffer;
 let explosion;
 let plus;
 let satelliteIMG = [];
@@ -16,11 +16,20 @@ let satelliteIMG = [];
 function preload() {
 	soundFormats('wav');
 	song = loadSound('./media/GameJam.mp3');
+	// buffer = new Tone.Buffer('./media/GameJam.mp3');
+	// song = new Tone.Player({
+	// 	url:buffer,
+	// 	autostart: true,
+	// 	loop:true
+	// 	}, () => song.start()).toMaster();
+	// song.volume.value = 20;
+
 	explosion = loadImage('./media/explosion.png');
 	plus = loadImage('./media/plus.png');
 	satelliteIMG[0] = loadImage('./media/satellite-0.png');
 	satelliteIMG[1] = loadImage('./media/satellite-1.png');
 }
+
 
 function setup() {
 	document.body.style.margin = 0;

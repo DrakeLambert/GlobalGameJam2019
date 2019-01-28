@@ -21,6 +21,8 @@ class Planet {
 		this.targetOffset = 5;
 		this.targetStroke = 2;
 
+		this.rotate = Math.random() * 2*PI;
+
 		this.img = loadImage(`./media/planet-${num % 6 + 1}.png`);
 
 		this.onSelected = new Trigger();
@@ -68,7 +70,9 @@ class Planet {
 		// planet
 		push();
 		imageMode(CENTER);
-		image(this.img, this.x, this.y, this.diameter, this.diameter);
+		translate(this.x,this.y);
+		rotate(this.rotate);
+		image(this.img, 0, 0, this.diameter, this.diameter);
 		pop();
 
 		// shuttle count
