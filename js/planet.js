@@ -16,6 +16,11 @@ class Planet {
 		/**@type {Planet} */
 		this.targetPlanet = null;
 
+		this.offset = 5;
+		this.stroke = 2;
+		this.targetOffset = 5;
+		this.targetStroke = 2;
+
 		this.img = loadImage(`./media/planet-${num % 6 + 1}.png`);
 
 		this.onSelected = new Trigger();
@@ -86,8 +91,30 @@ class Planet {
 		if (this.selected) {
 			noFill();
 			stroke('green');
-			strokeWeight(2);
-			circle(this.x, this.y, this.diameter / 2 + 5);
+			strokeWeight(this.stroke);
+			if (this.offset > 5) {
+				this.offset -= .5;
+				if (this.stroke <=2 ) {
+					this.stroke += .4;
+				}
+			}
+			circle(this.x, this.y, this.diameter / 2 + this.offset);
+		}
+		pop();
+
+		// animate target selection
+		push();
+		if (this.targetPlanet !== null && this.owner !== ai.player) {
+			noFill();
+			stroke('yellow');
+			strokeWeight(this.targetStroke);
+			if (this.targetOffset < 9) {
+				this.targetOffset+=.6;
+				if (this.targetStroke > 0) {
+					this.targetStroke-=.2;
+				}
+				circle(this.targetPlanet.x, this.targetPlanet.y, this.diameter / 2 + this.targetOffset);
+			}
 		}
 		pop();
 	}
@@ -95,6 +122,8 @@ class Planet {
 	mouseClicked() {
 		if (this.containsPoint(mouseX, mouseY)) {
 			onPlanetSelectedGlobal.trigger(this);
+			this.offset = 10;
+			this.stroke = 0;
 		}
 	}
 
@@ -107,6 +136,8 @@ class Planet {
 				} else if (player.lastPlanetSelection !== planet) {
 					// Send shuttles
 					player.lastPlanetSelection.targetPlanet = planet;
+					this.targetOffset = 5;
+					this.targetStroke = 2;
 				}
 			}
 		}

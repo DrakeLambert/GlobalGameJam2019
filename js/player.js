@@ -35,6 +35,8 @@ class Player {
 				this.lastSelectedPlanet.targetPlanet = null;
 			} else {
 				this.lastSelectedPlanet.targetPlanet = planet;
+				this.lastSelectedPlanet.targetOffset = 5;
+				this.lastSelectedPlanet.targetStroke = 2;
 			}
 			this.lastSelectedPlanet.selected = false;
 			this.lastSelectedPlanet = null;
